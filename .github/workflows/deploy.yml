@@ -48,11 +48,10 @@ jobs:
           script: |
             set -e
             cd ~
-            rm -rf express-test/
-            sudo apt install -y unzip
+            sudo rm -rf express-test/
             unzip -o app.zip -d express-test
             cd express-test
-            cat <<EOF> .env
+            cat <<EOF > .env
             JWT_SECRET_KEY= '${{ secrets.JWT_SECRET_KEY }}'
             GOOGLE_APP_PASSWORD= '${{ secrets.GOOGLE_APP_PASSWORD }}'
             GOOGLE_CLIENT_ID= '${{ secrets.GOOGLE_CLIENT_ID }}'
@@ -62,7 +61,6 @@ jobs:
             AWS_REGION= '${{ secrets.AWS_REGION }}'
             EOF
             
-            sudo apt install -y nodejs npm
             sudo npm ci
             sudo npm i -g pm2
             pm2 delete all || true
