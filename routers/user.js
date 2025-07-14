@@ -29,7 +29,11 @@ router.post("/login", passport.authenticate("local", { session: false }), (req, 
     res.json({message: "login success"})
 })
 
-
+router.post("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.json({ message: "Logged out" });
+});
+/*
 router.post("/logout", (req, res) => {
   req.logout(() => {
     req.session.destroy(() => {
@@ -38,7 +42,7 @@ router.post("/logout", (req, res) => {
       res.json({ message: "logout!" });
     });
   });
-});
+});*/
 
 
 
